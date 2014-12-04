@@ -1,0 +1,13 @@
+table#remote {
+	/*width: 33%;*/
+	/*text-align: center;*/
+}
+
+button {
+	width: 100px;
+	height: 36px;
+}
+
+button#symbol {
+	font-size: 125%;
+}
