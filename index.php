@@ -16,17 +16,20 @@ function goHome() {
   }
 }
 
-//function home() {
-//  exec('for cmd in EXIT EXIT EXIT EXIT HOME;do echo $cmd | nc 192.168.1.4 8080;sleep 0.3;done');
-//}
-
 if($btnval == "settings") {
   goHome();
-  exec('for cmd in DOWN DOWN DOWN RIGHT RIGHT RIGHT OK;do echo $cmd | nc 192.168.1.4 8080;sleep 0.3;done');
+  $settings_cmd = array("DOWN", "DOWN", "DOWN", "RIGHT", "RIGHT", "RIGHT", "OK");
+  foreach ($settings_cmd as $cmd) {
+    sendData("$cmd");
+  }
 }
 
 if($btnval == "i_radio") {
   goHome();
+  $i_radio_cmd = array("OK", "OK");
+  foreach ($i_radio_cmd as $cmd) {
+    sendData("$cmd");
+  }
   exec('for cmd in OK OK;do echo $cmd | nc 192.168.1.4 8080;sleep 0.3;done');
 }
 
@@ -34,7 +37,8 @@ if($btnval == "home") {
   goHome();
 }
 
-exec("echo $btnval | nc 192.168.1.4 8080");
+sendData("$btnval");
+//exec("echo $btnval | nc 192.168.1.4 8080");
 
 ?>
 
