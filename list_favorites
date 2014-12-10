@@ -1,14 +1,38 @@
-#!/bin/bash
+//#!/bin/bash
+//
+//curl -s -c listenlive_cookie \
+//  -d user=AutoStatic \
+//  -d pass=somepassword\
+//  -d sublogin=1 \
+//  -L http://listenlive.nl/process.php &> /dev/null
+//
+//curl -s -b listenlive_cookie \
+//  -e http://www.listenlive.nl/ind_rad.php \
+//  -L http://listenlive.nl/favo.php \
+//  | grep "station details" \
+//  | cut -d '>' -f 5 \
+//  | cut -d '<' -f 1
 
-curl -s -c listenlive_cookie \
-  -d user=AutoStatic \
-  -d pass=Krch1ddBpJ3JQyKS \
-  -d sublogin=1 \
-  -L http://listenlive.nl/process.php &> /dev/null
+$tmp_fname = tempnam('/tmp', 'listenlive_');
+$curl_handle = curl_init('http://listenlive.nl/process.php');
 
-curl -s -b listenlive_cookie \
-  -e http://www.listenlive.nl/ind_rad.php \
-  -L http://listenlive.nl/favo.php \
-  | grep "station details" \
-  | cut -d '>' -f 5 \
-  | cut -d '<' -f 1
+curl_setopt($curl_handle, CURLOPT_COOKIEJAR, $tmp_fname);
+curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, true);
+
+$post_array = array(
+  'user' => 'AutoStatic',
+  'pass' => 'somepassword',
+  'sublogin' => '1');
+
+curl_setopt($curl_handle, CURLOPT_POSTFIELDS, $post_array);
+
+$output = curl_exec($curl_handle);
+
+$curl_handle = curl_init ('http://listenlive.nl/favo.php');
+curl_setopt ($curl_handle, CURLOPT_COOKIEFILE, $tmp_fname);
+curl_setopt ($curl_handle, CURLOPT_RETURNTRANSFER, true);
+curl_setopt ($curl_handle, CURLOPT_REFERER, 'http://www.listenlive.nl/ind_rad.php');
+
+$output = curl_exec($curl_handle);
+
+echo $output;

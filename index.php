@@ -11,7 +11,7 @@ function sendData($data) {
 
 function goHome() {
   $home_cmd = array("EXIT", "EXIT", "EXIT", "EXIT", "HOME");
-  foreach ($home_cmd as $cmd) {
+  foreach($home_cmd as $cmd) {
     sendData("$cmd");
   }
 }
@@ -23,15 +23,63 @@ switch($btnval) {
   case "settings":
     goHome();
     $settings_cmd = array("DOWN", "DOWN", "DOWN", "RIGHT", "RIGHT", "RIGHT", "OK");
-    foreach ($settings_cmd as $cmd) {
+    foreach($settings_cmd as $cmd) {
       sendData("$cmd");
     }
     break;
   case "i_radio":
     goHome();
     $i_radio_cmd = array("OK", "OK");
-    foreach ($i_radio_cmd as $cmd) {
+    foreach($i_radio_cmd as $cmd) {
       sendData("$cmd");
+    }
+    break;
+  case "fav1":
+    goHome();
+    $fav1_cmd = array("OK", "OK", "OK");
+    foreach($fav1_cmd as $cmd) {
+      sendData("$cmd");
+      usleep(200000);
+    }
+    break;
+  case "fav2":
+    goHome();
+    $fav2_cmd = array("OK", "OK", "DOWN", "OK");
+    foreach($fav2_cmd as $cmd) {
+      sendData("$cmd");
+      usleep(200000);
+    }
+    break;
+  case "fav3":
+    goHome();
+    $fav3_cmd = array("OK", "OK", "DOWN", "DOWN", "OK");
+    foreach($fav3_cmd as $cmd) {
+      sendData("$cmd");
+      usleep(200000);
+    }
+    break;
+  case "fav4":
+    goHome();
+    $fav4_cmd = array("OK", "OK", "DOWN", "DOWN", "DOWN", "OK");
+    foreach($fav4_cmd as $cmd) {
+      sendData("$cmd");
+      usleep(200000);
+    }
+    break;
+  case "fav5":
+    goHome();
+    $fav5_cmd = array("OK", "OK", "DOWN", "DOWN", "DOWN", "DOWN", "OK");
+    foreach($fav5_cmd as $cmd) {
+      sendData("$cmd");
+      usleep(200000);
+    }
+    break;
+  case "fav6":
+    goHome();
+    $fav6_cmd = array("OK", "OK", "DOWN", "DOWN", "DOWN", "DOWN", "DOWN", "OK");
+    foreach($fav6_cmd as $cmd) {
+      sendData("$cmd");
+      usleep(200000);
     }
     break;
   default:
@@ -105,15 +153,15 @@ switch($btnval) {
     <td><button id="symbol" name="button" value="track_prev">&#9647;&#9665;</button></td>
   </tr>
   <tr>
-    <td><button name="button" value="null">NULL</button></td>
-    <td><button name="button" value="null">NULL</button></td>		
-    <td><button name="button" value="null">NULL</button></td>		
+    <td><button name="button" value="fav1">FAV1</button></td>
+    <td><button name="button" value="fav2">FAV2</button></td>		
+    <td><button name="button" value="fav3">FAV3</button></td>		
     <td></td>
   </tr>
   <tr>
-    <td><button name="button" value="null">NULL</button></td>
-    <td><button name="button" value="null">NULL</button></td>		
-    <td><button name="button" value="null">NULL</button></td>		
+    <td><button name="button" value="fav4">FAV4</button></td>
+    <td><button name="button" value="fav5">FAV5</button></td>		
+    <td><button name="button" value="fav6">FAV6</button></td>		
     <td></td>
   </tr>
 </table>
