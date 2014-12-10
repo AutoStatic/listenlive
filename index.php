@@ -1,12 +1,40 @@
 <?php
-	$btnval=$_GET["button"];
 
-        if($btnval == "home") {
-                exec('for cmd in EXIT EXIT EXIT EXIT HOME;do echo $cmd | nc 192.168.1.4 8080;sleep 0.5;done');
-        }
+$btnval=$_GET["button"];
 
-       	exec("echo $btnval | nc 192.168.1.4 8080");
-	//print($btnval);
+function sendData($data) {
+  $socket = fsockopen("192.168.1.4", 8080);
+  fwrite($socket,$data);
+  usleep(30000);
+  fclose($socket);
+}
+
+function goHome() {
+  $home_cmd = array("EXIT", "EXIT", "EXIT", "EXIT", "HOME");
+  foreach ($home_cmd as $cmd) {
+    sendData("$cmd");
+  }
+}
+
+//function home() {
+//  exec('for cmd in EXIT EXIT EXIT EXIT HOME;do echo $cmd | nc 192.168.1.4 8080;sleep 0.3;done');
+//}
+
+if($btnval == "settings") {
+  goHome();
+  exec('for cmd in DOWN DOWN DOWN RIGHT RIGHT RIGHT OK;do echo $cmd | nc 192.168.1.4 8080;sleep 0.3;done');
+}
+
+if($btnval == "i_radio") {
+  goHome();
+  exec('for cmd in OK OK;do echo $cmd | nc 192.168.1.4 8080;sleep 0.3;done');
+}
+
+if($btnval == "home") {
+  goHome();
+}
+
+exec("echo $btnval | nc 192.168.1.4 8080");
 
 ?>
 
@@ -17,6 +45,7 @@
 <title>Listenlive Web Remote Control</title>
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
@@ -25,19 +54,13 @@
 <table id="remote">
   <tr>
     <td><button name="button" value="POWER">POWER</button></td>
-    <td></td>		
-    <td><button name="button" value="lcd_tv">LCD/TV</button></td>
-  </tr>
-  <tr>
-    <td><button name="button" value="i_tv">I-TV</button></td>
-    <td><button name="button" value="MUTE">MUTE</button></td>		
-    <td><button name="button" value="network">NETWORK</button></td>
+    <td><button name="button" value="settings">SETTINGS</button></td>		
+    <td><button name="button" value="home">HOME</button></td>
   </tr>
   <tr>
     <td><button name="button" value="i_radio">I-RADIO</button></td>
-    <td><button name="button" value="fullscreen">FULLSCR</button></td>		
-    <td><button name="button" value="home">HOME</button></td>		
-    <td></td>
+    <td><button name="button" value="MUTE">MUTE</button></td>		
+    <td><button name="button" value="network">NETWORK</button></td>
   </tr>
   <tr>
     <td><button name="button" value="PGUP">PAGE-</button></td>
@@ -78,6 +101,18 @@
     <td><button name="button" value="VOLm">VOL-</button></td>
     <td><button id="symbol" name="button" value="REPEAT">&#8634;</button></td>		
     <td><button id="symbol" name="button" value="track_prev">&#9647;&#9665;</button></td>
+  </tr>
+  <tr>
+    <td><button name="button" value="null">NULL</button></td>
+    <td><button name="button" value="null">NULL</button></td>		
+    <td><button name="button" value="null">NULL</button></td>		
+    <td></td>
+  </tr>
+  <tr>
+    <td><button name="button" value="null">NULL</button></td>
+    <td><button name="button" value="null">NULL</button></td>		
+    <td><button name="button" value="null">NULL</button></td>		
+    <td></td>
   </tr>
 </table>
 </form>

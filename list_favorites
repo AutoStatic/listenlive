@@ -1,0 +1,14 @@
+#!/bin/bash
+
+curl -s -c listenlive_cookie \
+  -d user=AutoStatic \
+  -d pass=Krch1ddBpJ3JQyKS \
+  -d sublogin=1 \
+  -L http://listenlive.nl/process.php &> /dev/null
+
+curl -s -b listenlive_cookie \
+  -e http://www.listenlive.nl/ind_rad.php \
+  -L http://listenlive.nl/favo.php \
+  | grep "station details" \
+  | cut -d '>' -f 5 \
+  | cut -d '<' -f 1
