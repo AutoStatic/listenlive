@@ -5,7 +5,7 @@ $btnval=$_GET["button"];
 function sendData($data) {
   $socket = fsockopen("192.168.1.4", 8080);
   fwrite($socket,$data);
-  usleep(30000);
+  usleep(300000);
   fclose($socket);
 }
 
