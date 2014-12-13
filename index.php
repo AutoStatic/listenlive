@@ -17,6 +17,8 @@ function goHome() {
 }
 
 switch($btnval) {
+  case "":
+    break;
   case "home":
     goHome();
     break;
@@ -31,6 +33,13 @@ switch($btnval) {
     goHome();
     $i_radio_cmd = array("OK", "OK");
     foreach($i_radio_cmd as $cmd) {
+      sendData("$cmd");
+    }
+    break;
+  case "music_library":
+    goHome();
+    $music_library_cmd = array("OK", "OK");
+    foreach($music_library_cmd as $cmd) {
       sendData("$cmd");
     }
     break;
@@ -110,7 +119,7 @@ switch($btnval) {
   <tr>
     <td><button name="button" value="i_radio">I-RADIO</button></td>
     <td><button name="button" value="MUTE">MUTE</button></td>		
-    <td><button name="button" value="network">NETWORK</button></td>
+    <td><button name="button" value="music_library">MUSIC<br>LIBRARY</button></td>
   </tr>
   <tr>
     <td><button name="button" value="PGUP">PAGE-</button></td>
